@@ -1,53 +1,51 @@
-def T(n):
-    if(n==0 or n==1):return 0
-    else:
-        if(n==2):return 1
-        else:return T(n-1)+T(n-2)+T(n-3)
+# Copyright (c) Streamlit Inc. (2018-2022) Snowflake Inc. (2022)
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 
-#for i in range(4,11):
- #   print(T(i)/T(i-1))
+import streamlit as st
+from streamlit.logger import get_logger
 
-ls=[1,2,3,2,5,8,6]
+LOGGER = get_logger(__name__)
 
-def d(ls):
-    ds=[]
-    for i in range(0,len(ls)):
-        if(i==0):ds.append(1);continue
-        if ls[i]>ls[i-1]:ds.append(1)
-        else: ds.append(-1)
-    return ds
 
-def shuffle(ls):
-    ls_l=[]
-    ls_r=[]
-    x=len(ls)
-    if(x%2==0):
-        for i in range(int(x/2)):
-            ls_l.append(ls[i])
-            ls_r.append(ls[int(i+x/2)])
-    else:
-        for i in range (int((x+1)/2)):
-            ls_l.append(ls[i])
-        for i in range(int((x+1)/2),x):
-            ls_r.append(ls[i])
+def run():
+    st.set_page_config(
+        page_title="Hello",
+        page_icon="👋",
+    )
 
-    print(ls_l,ls_r)
-    ls_ges=[]
-    for i in range (int(x/2)):
-        ls_ges.append(ls_l[i])
-        ls_ges.append(ls_r[i])
-        if x%2==1 and i==int(x/2-1):ls_ges.append(ls_l[i+1])
-    return ls_ges
+    st.write("# Welcome to Streamlit! 👋")
 
-def shuffle_ord(n):
-    k=1
-    liste=[i for i in range(n)]
-    liste1=shuffle(liste)
-    while(liste1!=liste):
-        liste1=shuffle(liste1)
-        k+=1
-    return k
+    st.sidebar.success("Select a demo above.")
 
-print(shuffle(ls))
+    st.markdown(
+        """
+        Streamlit is an open-source app framework built specifically for
+        Machine Learning and Data Science projects.
+        **👈 Select a demo from the sidebar** to see some examples
+        of what Streamlit can do!
+        ### Want to learn more?
+        - Check out [streamlit.io](https://streamlit.io)
+        - Jump into our [documentation](https://docs.streamlit.io)
+        - Ask a question in our [community
+          forums](https://discuss.streamlit.io)
+        ### See more complex demos
+        - Use a neural net to [analyze the Udacity Self-driving Car Image
+          Dataset](https://github.com/streamlit/demo-self-driving)
+        - Explore a [New York City rideshare dataset](https://github.com/streamlit/demo-uber-nyc-pickups)
+    """
+    )
 
-            
+
+if __name__ == "__main__":
+    run()
